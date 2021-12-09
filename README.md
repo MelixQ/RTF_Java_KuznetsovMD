@@ -257,7 +257,7 @@ insert(List<Passenger> passengers) в цикле foreach() направляет 
  }
  ```
  1. Создаем экземпляр Program
- 2. Последовательно выполняем open() -> insert() -> <tasks> -> close()
+ 2. Последовательно выполняем open() -> insert() -> tasks_methods -> close()
  
  Метод close() выполняет функцию закрытия подлючения conn к нашей базе данных.
  ```Java
