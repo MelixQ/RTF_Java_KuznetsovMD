@@ -16,7 +16,9 @@ public class Passenger {
     @CsvBindByName(column = "Ticket")
     private String ticket;
 
-    public void setSex(String sex) { this.sex = sex; }
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     public String getSex() {
         return sex;
@@ -46,7 +48,11 @@ public class Passenger {
         return embarkStation;
     }
 
-    public void setTicket(String ticket) { this.ticket = ticket; }
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
+    }
 
-    public String getTicket() { return ticket; }
+    public String getTicket() {
+        return ticket;
+    }
 }

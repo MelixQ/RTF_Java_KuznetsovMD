@@ -1,21 +1,13 @@
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
-import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import org.jfree.ui.ApplicationFrame;
-import org.jfree.ui.RefineryUtilities;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -82,20 +74,16 @@ public class Program {
                 String embarkStation = rs.getString("embarked");
                 // Формируем датасет, соотнося по ID на оси oX и полу + станции на оси oY
                 if (sex.equals("male") && fare != 0.0) {
-                    if (embarkStation.equals("C")) {
-                        MC.add(id, fare);
-                    } else if (embarkStation.equals("Q")) {
-                        MQ.add(id, fare);
-                    } else if (embarkStation.equals("S")) {
-                        MS.add(id, fare);
+                    switch (embarkStation) {
+                        case "C" -> MC.add(id, fare);
+                        case "Q" -> MQ.add(id, fare);
+                        case "S" -> MS.add(id, fare);
                     }
                 } else if (sex.equals("female") && fare != 0.0){
-                    if (embarkStation.equals("C")) {
-                        FC.add(id, fare);
-                    } else if (embarkStation.equals("Q")) {
-                        FQ.add(id, fare);
-                    } else if (embarkStation.equals("S")) {
-                        FS.add(id, fare);
+                    switch (embarkStation) {
+                        case "C" -> FC.add(id, fare);
+                        case "Q" -> FQ.add(id, fare);
+                        case "S" -> FS.add(id, fare);
                     }
                 }
             }
@@ -128,8 +116,8 @@ public class Program {
                     "SELECT sex, age, fare " +
                     " FROM titanic ";
             ResultSet rs = statement.executeQuery(query);
-            Double minFare = Double.MAX_VALUE;
-            Double maxFare = Double.MIN_VALUE;
+            double minFare = Double.MAX_VALUE;
+            double maxFare = Double.MIN_VALUE;
             while (rs.next()){
                 double fare = rs.getDouble("fare");
                 double age = rs.getDouble("age");
@@ -163,7 +151,7 @@ public class Program {
                     "SELECT sex, age, ticket " +
                     " FROM titanic ";
             ResultSet rs = statement.executeQuery(query);
-            ArrayList<String> tickets = new ArrayList<String>();
+            ArrayList<String> tickets = new ArrayList<>();
             while (rs.next()){
                 String sex = rs.getString("sex");
                 double age = rs.getDouble("age");
